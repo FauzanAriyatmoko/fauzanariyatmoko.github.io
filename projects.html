@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projects by Fauzan Ariyatmoko | AI, ML, Computer Vision, Embedded Systems">
+    <title>Projects | Fauzan Ariyatmoko</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 40px 0;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            font-family: var(--font-mono);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            background: rgba(0, 170, 255, 0.1);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 32px;
+            margin-bottom: 80px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: #1a1a1a;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .project-info {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-category {
+            font-size: 0.75rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-family: var(--font-mono);
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .tech-tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .project-link {
+            flex: 1;
+            padding: 10px;
+            font-size: 0.85rem;
+            text-align: center;
+            border-radius: var(--radius);
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .link-github {
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+        }
+
+        .link-github:hover {
+            border-color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .link-details {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+        }
+
+        .link-details:hover {
+            background: var(--accent-bright);
+            box-shadow: 0 0 10px var(--accent-primary);
+        }
+
+        @media (max-width: 480px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="font-mono text-accent" style="font-weight: 700; font-size: 1.2rem;">FA</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link active">Projects</a></li>
+                <li><a href="certificates.html" class="nav-link">Certificates</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container" style="padding-top: 60px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h1 style="font-size: 3rem; margin-bottom: 16px;">My <span class="text-accent">Projects</span></h1>
+            <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+                A collection of my work in Artificial Intelligence, Computer Vision, and Embedded Systems.
+            </p>
+        </div>
+
+        <div id="filter-bar" class="filter-bar">
+            <button class="filter-btn active" data-category="All">All</button>
+            <button class="filter-btn" data-category="Machine Learning">Machine Learning</button>
+            <button class="filter-btn" data-category="Computer Vision">Computer Vision</button>
+            <button class="filter-btn" data-category="AI">AI</button>
+            <button class="filter-btn" data-category="Embedded">Embedded</button>
+        </div>
+
+        <div id="projects-grid" class="projects-grid"></div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Fauzan Ariyatmoko</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { projects } from './data/projects.js';
+        import { element, externalLink } from './js/utils.js';
+
+        const grid = document.getElementById('projects-grid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        function renderProjects(category = 'All') {
+            grid.innerHTML = '';
+            const filtered = category === 'All' 
+                ? projects 
+                : projects.filter(p => p.category === category);
+
+            filtered.forEach(p => {
+                const card = element('div', 'project-card');
+                
+                // Placeholder for project image
+                const img = element('img', 'project-image');
+                img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100%25" height="200"%3E%3Crect width="100%25" height="100%25" fill="%231a1a1a"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23333" font-family="sans-serif" font-size="20"%3EProject Preview%3C/text%3E%3C/svg%3E';
+                img.alt = p.title;
+                img.loading = 'lazy';
+                card.appendChild(img);
+
+                const info = element('div', 'project-info');
+                info.appendChild(element('span', 'project-category', p.category));
+                info.appendChild(element('h3', 'project-title', p.title));
+                info.appendChild(element('p', 'project-desc', p.description));
+
+                const tech = element('div', 'project-tech');
+                p.technologies.forEach(t => tech.appendChild(element('span', 'tech-tag', t)));
+                info.appendChild(tech);
+
+                const links = element('div', 'project-links');
+                
+                const ghLink = externalLink('GitHub', p.github, 'project-link link-github');
+                if (ghLink) links.appendChild(ghLink);
+
+                const detLink = element('a', 'project-link link-details', 'Details');
+                detLink.href = p.details;
+                links.appendChild(detLink);
+
+                info.appendChild(links);
+                card.appendChild(info);
+                grid.appendChild(card);
+            });
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderProjects(btn.dataset.category);
+            });
+        });
+
+        // Initial render
+        renderProjects();
+    </script>
+</body>
+</html>
